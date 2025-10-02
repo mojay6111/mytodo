@@ -1,24 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>My To-Do App</title>
+    <!-- Link to external CSS (create styles.css) -->
     <link rel="stylesheet" href="style.css" />
-    <title>To Do App</title>
   </head>
   <body>
-    <h1>My To Do List</h1>
-    <form id="todo-form">
-      <input
-        type="text"
-        id="todo-input"
-        placeholder="Add a new task..."
-        required
-      />
-      <button type="submit" id="add-btn">Add</button>
-    </form>
-    <ul id="todo-list"></ul>
-    <script src="app.js"></script>
+    <!-- Header is presenting app title and a simple nav -->
+    <header class="app-header">
+      <h1 class="app-title">My To-Do List</h1>
+      <p class="app-subtitle">Lightweight • Personal • Focused</p>
+    </header>
+
+    <!-- Main app container is holding the input area and task list -->
+    <main class="app-main" id="app" aria-labelledby="app-title">
+      <!-- Add task form is allowing quick add and structured inputs -->
+      <form
+        id="task-form"
+        class="task-form"
+        aria-label="Add new task"
+        autocomplete="off"
+      >
+        <!-- Comment: Inputs are being used by JS to create new tasks -->
+        <div class="form-row">
+          <input
+            id="task-input"
+            class="task-input"
+            type="text"
+            name="title"
+            placeholder="What do you want to do?"
+            required
+            aria-required="true"
+          />
+          <button type="submit" class="btn btn-add" aria-label="Add task">
+            Add
+          </button>
+        </div>
+
+        <div class="form-row form-row-2">
+          <label for="due-date" class="sr-only">Due date</label>
+          <input id="due-date" name="dueDate" type="date" class="input-small" />
+
+          <label for="priority" class="sr-only">Priority</label>
+          <select id="priority" name="priority" class="input-small">
+            <option value="normal" selected>Normal</option>
+            <option value="low">Low</option>
+            <option value="high">High</option>
+          </select>
+
+          <label for="tags" class="sr-only">Tags</label>
+          <input
+            id="tags"
+            name="tags"
+            type="text"
+            class="input-small"
+            placeholder="Tags (comma)"
+          />
+        </div>
+      </form>
+
+      <!-- Controls area is providing quick filters and view options -->
+      <section class="controls" aria-label="Task controls">
+        <div class="filters">
+          <button class="filter-btn" data-filter="all" aria-pressed="true">
+            All
+          </button>
+          <button class="filter-btn" data-filter="active">Active</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+
+        <div class="view-actions">
+          <button id="sort-btn" class="action-btn">Sort</button>
+          <button id="clear-completed" class="action-btn">
+            Clear Completed
+          </button>
+        </div>
+      </section>
+
+      <!-- Task list is where tasks are being rendered by JS -->
+      <section class="tasks-section" aria-live="polite">
+        <ul id="task-list" class="task-list" role="list" aria-label="Tasks">
+          <!-- JS is inserting task <li> elements here -->
+        </ul>
+        <!-- Empty state is being shown when there are no tasks -->
+        <div id="empty-state" class="empty-state" hidden>
+          <p>No tasks yet — add your first task above.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer is giving small help text and version -->
+    <footer class="app-footer" role="contentinfo">
+      <small
+        >Tip: type "Buy milk tomorrow" for quick-add (natural language parsing
+        later).</small
+      >
+      <span class="app-version">v0.1</span>
+    </footer>
+
+    <!-- Link to external JS (create app.js) -->
+    <script src="app.js" defer></script>
   </body>
 </html>
